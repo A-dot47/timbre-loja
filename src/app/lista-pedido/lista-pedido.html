@@ -1,0 +1,37 @@
+<section class="pagina conteiner">
+  <h1 class="titulo">Meus pedidos</h1>
+
+  @if (carregando) {
+    <div class="esqueleto" style="height: 12rem" aria-busy="true"></div>
+  } @else if (mensagem) {
+    <div class="vazio">
+      <h2>{{ mensagem }}</h2>
+      <a routerLink="/" class="btn btn--primario">Ver destaques</a>
+    </div>
+  } @else {
+    <div class="tabela-caixa">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Data</th>
+            <th scope="col">Itens</th>
+            <th scope="col">Entrega</th>
+            <th scope="col" class="num">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pedido of lista; track pedido.codigoPedido) {
+            <tr>
+              <th scope="row">#{{ pedido.codigoPedido }}</th>
+              <td>{{ pedido.dataPedido | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ pedido.itens.length || 0 }}</td>
+              <td>{{ pedido.entrega }}</td>
+              <td class="num">{{ pedido.valorTotal | currency: 'BRL' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

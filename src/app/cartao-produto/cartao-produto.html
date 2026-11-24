@@ -1,0 +1,29 @@
+<article class="cartao">
+  <a class="cartao__foto" href="detalhe" (click)="verDetalhe($event)" [attr.aria-label]="'Ver detalhes de ' + produto.nome">
+    <app-foto [produto]="produto" />
+    @if (promo()) {
+      <span class="selo">−{{ desconto() }}%</span>
+    }
+  </a>
+
+  <div class="cartao__corpo">
+    <h3 class="cartao__nome">
+      <a href="detalhe" (click)="verDetalhe($event)">{{ produto.nome }}</a>
+    </h3>
+
+    <p class="preco">
+      @if (promo()) {
+        <s class="preco__de">{{ produto.valor | currency: 'BRL' }}</s>
+      }
+      <strong class="preco__por">{{ preco() | currency: 'BRL' }}</strong>
+    </p>
+
+    @if (produto.quantidade > 0) {
+      <button type="button" class="btn btn--primario btn--cheio" (click)="comprar()">
+        <app-icone nome="cesta" [tamanho]="18" /> Comprar
+      </button>
+    } @else {
+      <p class="esgotado">Esgotado</p>
+    }
+  </div>
+</article>

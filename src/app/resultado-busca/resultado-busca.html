@@ -1,0 +1,44 @@
+<section class="pagina conteiner">
+  <header class="secao__cabeca">
+    <h1 class="titulo">
+      @if (termo) {
+        Resultados para “{{ termo }}”
+      } @else {
+        Todos os produtos
+      }
+    </h1>
+    @if (!carregando && !erro) {
+      <p class="secao__contagem">{{ lista.length }} {{ lista.length == 1 ? "produto" : "produtos" }}</p>
+    }
+  </header>
+
+  @if (carregando) {
+    <div class="grade" aria-busy="true">
+      @for (n of [1, 2, 3, 4]; track n) {
+        <div class="esqueleto-cartao">
+          <div class="esqueleto esqueleto--foto"></div>
+          <div class="esqueleto esqueleto--linha"></div>
+          <div class="esqueleto esqueleto--linha curta"></div>
+        </div>
+      }
+    </div>
+  } @else if (erro) {
+    <div class="vazio">
+      <h2>Não conseguimos fazer a busca agora.</h2>
+      <p>Confira sua conexão e tente novamente.</p>
+      <button type="button" class="btn btn--escuro" (click)="fazerBusca()">Tentar de novo</button>
+    </div>
+  } @else if (lista.length == 0) {
+    <div class="vazio">
+      <h2>Nada encontrado para “{{ termo }}”.</h2>
+      <p>Confira a grafia ou procure por um termo mais geral, como “violão” ou “teclado”.</p>
+      <a routerLink="/resultado-busca" class="btn btn--escuro">Ver todos os produtos</a>
+    </div>
+  } @else {
+    <div class="grade">
+      @for (p of lista; track p.codigo) {
+        <app-cartao-produto [produto]="p" />
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,12 @@
+<form class="busca" (ngSubmit)="buscar()" role="search">
+  <input
+    type="search"
+    name="termo"
+    [(ngModel)]="termo"
+    (ngModelChange)="guardar()"
+    placeholder="Busque violão, teclado, cordas…"
+    aria-label="Buscar produtos"
+    autocomplete="off"
+  />
+  <button type="submit" aria-label="Buscar"><app-icone nome="busca" /></button>
+</form>

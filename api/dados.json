@@ -1,0 +1,87 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Violão Folk Aço Natural",
+      "categoria": "violoes",
+      "preco": 1290,
+      "imagem": "1.jpg",
+      "promocao": false
+    },
+    {
+      "id": "2",
+      "nome": "Violão Clássico Cordas de Nylon",
+      "categoria": "violoes",
+      "preco": 890,
+      "imagem": "2.jpg",
+      "promocao": false
+    },
+    {
+      "id": "3",
+      "nome": "Guitarra Stratocaster Sunburst",
+      "categoria": "guitarras",
+      "preco": 2490,
+      "imagem": "3.jpg",
+      "promocao": true
+    },
+    {
+      "id": "4",
+      "nome": "Guitarra Les Paul Preta",
+      "categoria": "guitarras",
+      "preco": 3190,
+      "imagem": "4.jpg",
+      "promocao": false
+    },
+    {
+      "id": "5",
+      "nome": "Baixo Jazz Bass 4 Cordas",
+      "categoria": "baixos",
+      "preco": 2790,
+      "imagem": "5.jpg",
+      "promocao": false
+    },
+    {
+      "id": "6",
+      "nome": "Baixo Precision 5 Cordas",
+      "categoria": "baixos",
+      "preco": 3390,
+      "imagem": "6.jpg",
+      "promocao": true
+    },
+    {
+      "id": "7",
+      "nome": "Teclado Arranjador 61 Teclas",
+      "categoria": "teclados",
+      "preco": 1890,
+      "imagem": "7.jpg",
+      "promocao": false
+    },
+    {
+      "id": "8",
+      "nome": "Piano Digital 88 Teclas",
+      "categoria": "teclados",
+      "preco": 4590,
+      "imagem": "8.jpg",
+      "promocao": true
+    },
+    {
+      "id": "9",
+      "nome": "Jogo de Cordas Nylon",
+      "categoria": "acessorios",
+      "preco": 49,
+      "imagem": "9.jpg",
+      "promocao": false
+    },
+    {
+      "id": "10",
+      "nome": "Afinador Digital Clip",
+      "categoria": "acessorios",
+      "preco": 79,
+      "imagem": "10.jpg",
+      "promocao": true
+    }
+  ],
+  "cesta": [],
+  "pedidos": [],
+  "usuarios": []
+}

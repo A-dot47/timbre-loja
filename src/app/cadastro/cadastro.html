@@ -1,0 +1,69 @@
+<section class="pagina conteiner">
+  <h1 class="titulo">{{ edicao ? "Meu cadastro" : "Criar minha conta" }}</h1>
+
+  <form class="painel painel--formulario" (ngSubmit)="gravar()" novalidate>
+    <div class="campo" [class.campo--erro]="erros.nome">
+      <label for="nome">Nome completo</label>
+      <input id="nome" name="nome" type="text" [(ngModel)]="obj.nome" autocomplete="name" />
+      @if (erros.nome) { <p class="campo__erro">{{ erros.nome }}</p> }
+    </div>
+
+    <div class="campo" [class.campo--erro]="erros.email">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" [(ngModel)]="obj.email" autocomplete="email" />
+      @if (erros.email) { <p class="campo__erro">{{ erros.email }}</p> }
+    </div>
+
+    <div class="campos-lado">
+      <div class="campo" [class.campo--erro]="erros.senha">
+        <label for="senha">{{ edicao ? "Sua senha (ou uma nova)" : "Senha" }}</label>
+        <input id="senha" name="senha" type="password" [(ngModel)]="obj.senha" autocomplete="new-password" />
+        @if (erros.senha) { <p class="campo__erro">{{ erros.senha }}</p> }
+      </div>
+
+      <div class="campo" [class.campo--erro]="erros.confirma">
+        <label for="confirma">Confirme a senha</label>
+        <input id="confirma" name="confirma" type="password" [(ngModel)]="confirma" autocomplete="new-password" />
+        @if (erros.confirma) { <p class="campo__erro">{{ erros.confirma }}</p> }
+      </div>
+    </div>
+    @if (edicao) {
+      <p class="campo__dica">Para salvar alterações, informe sua senha atual ou escolha uma nova.</p>
+    }
+
+    <div class="campos-lado">
+      <div class="campo" [class.campo--erro]="erros.documento">
+        <label for="documento">CPF</label>
+        <input id="documento" name="documento" type="text" inputmode="numeric" maxlength="14" [(ngModel)]="obj.documento" />
+        @if (erros.documento) { <p class="campo__erro">{{ erros.documento }}</p> }
+      </div>
+
+      <div class="campo" [class.campo--erro]="erros.telefone">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" name="telefone" type="tel" inputmode="tel" maxlength="15" [(ngModel)]="obj.telefone" autocomplete="tel" />
+        @if (erros.telefone) { <p class="campo__erro">{{ erros.telefone }}</p> }
+      </div>
+    </div>
+
+    <div class="campo" [class.campo--erro]="erros.logradouro">
+      <label for="logradouro">Endereço de entrega</label>
+      <textarea id="logradouro" name="logradouro" rows="2" [(ngModel)]="obj.logradouro" autocomplete="street-address" placeholder="Rua, número, bairro, cidade"></textarea>
+      @if (erros.logradouro) { <p class="campo__erro">{{ erros.logradouro }}</p> }
+    </div>
+
+    @if (sucesso) {
+      <p class="alerta alerta--ok" role="status">{{ sucesso }}</p>
+    }
+    @if (falha) {
+      <p class="alerta alerta--erro" role="alert">{{ falha }}</p>
+    }
+
+    <button type="submit" class="btn btn--primario btn--grande" [disabled]="enviando">
+      {{ enviando ? "Salvando…" : edicao ? "Salvar alterações" : "Criar conta" }}
+    </button>
+
+    @if (!edicao) {
+      <p class="campo__dica">Já tem conta? <a routerLink="/login" class="link">Entrar</a></p>
+    }
+  </form>
+</section>

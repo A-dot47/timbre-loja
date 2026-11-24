@@ -1,0 +1,68 @@
+@if (erro) {
+  <span class="foto-vazia" role="img" [attr.aria-label]="produto.nome">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      @switch (tipo) {
+        @case ('violao') {
+          <g transform="rotate(-28 60 60)">
+            <rect x="56.5" y="6" width="7" height="52" rx="1.5" fill="#14262c" />
+            <rect x="53" y="2" width="14" height="14" rx="3" fill="#14262c" />
+            <circle cx="60" cy="52" r="15" fill="#efa23a" />
+            <circle cx="60" cy="78" r="21" fill="#efa23a" />
+            <circle cx="60" cy="70" r="6.5" fill="#14262c" />
+            <circle cx="60" cy="70" r="9" fill="none" stroke="#b9561f" stroke-width="1.6" />
+            <rect x="51" y="88" width="18" height="3.5" rx="1.5" fill="#14262c" />
+            <path d="M58.5 16V90M61.5 16V90" stroke="#f1e6c6" stroke-width=".7" />
+          </g>
+        }
+        @case ('eletrica') {
+          <g transform="rotate(-28 60 60)">
+            <rect x="57" y="6" width="6" height="56" rx="1.5" fill="#14262c" />
+            <rect x="54" y="2" width="12" height="13" rx="3" fill="#14262c" />
+            <path d="M60 58C46 52 36 58 38 70C30 76 32 92 44 98C56 104 70 104 80 96C90 88 88 74 80 70C84 60 74 52 60 58Z" [attr.fill]="corCorpo" />
+            <rect x="50" y="72" width="20" height="4.5" rx="1" fill="#14262c" />
+            <rect x="50" y="83" width="20" height="4.5" rx="1" fill="#14262c" />
+            <rect x="52" y="93" width="16" height="2.5" rx="1" fill="#cfd9dc" />
+            <path d="M59 14V94M61 14V94" stroke="#f1e6c6" stroke-width=".7" />
+          </g>
+        }
+        @case ('teclado') {
+          <rect x="6" y="38" width="108" height="46" rx="5" fill="#14262c" />
+          <rect x="12" y="44" width="96" height="34" rx="2" fill="#f1e6c6" />
+          @for (i of [1, 2, 3, 4, 5, 6, 7]; track i) {
+            <path [attr.d]="'M' + (12 + i * 12) + ' 44V78'" stroke="#b9c4c2" stroke-width=".8" />
+          }
+          @for (x of [20.5, 32.5, 56.5, 68.5, 80.5]; track x) {
+            <rect [attr.x]="x" y="44" width="7" height="20" rx="1" fill="#14262c" />
+          }
+          <rect x="14" y="40" width="20" height="2.5" rx="1" fill="#efa23a" />
+        }
+        @case ('bateria') {
+          <path d="M16 27V52M104 25V52" stroke="#14262c" stroke-width="2" />
+          <ellipse cx="16" cy="24" rx="14" ry="3.5" fill="#d9a33f" />
+          <ellipse cx="104" cy="22" rx="14" ry="3.5" fill="#d9a33f" />
+          <circle cx="34" cy="46" r="13" fill="#a92b2f" stroke="#14262c" stroke-width="3" />
+          <circle cx="86" cy="46" r="13" fill="#a92b2f" stroke="#14262c" stroke-width="3" />
+          <circle cx="60" cy="76" r="24" fill="#efa23a" stroke="#14262c" stroke-width="3.5" />
+          <circle cx="60" cy="76" r="13" fill="none" stroke="#b9561f" stroke-width="2" />
+          <circle cx="60" cy="76" r="4" fill="#14262c" />
+        }
+        @case ('sopro') {
+          <g transform="rotate(-35 60 60)">
+            <rect x="8" y="55" width="104" height="10" rx="5" fill="#cfd9dc" stroke="#14262c" stroke-width="2" />
+            @for (x of [34, 48, 62, 76, 90]; track x) {
+              <circle [attr.cx]="x" cy="60" r="2.8" fill="#14262c" />
+            }
+            <rect x="14" y="56.5" width="12" height="7" rx="3" fill="#efa23a" />
+          </g>
+        }
+        @default {
+          <path d="M44 86V30l44-8v52" fill="none" stroke="#1f5457" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="34" cy="86" r="11" fill="#1f5457" />
+          <circle cx="78" cy="74" r="11" fill="#1f5457" />
+        }
+      }
+    </svg>
+  </span>
+} @else {
+  <img [src]="fonte" [alt]="produto.nome" loading="lazy" (error)="falhou()" />
+}

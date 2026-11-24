@@ -1,0 +1,22 @@
+<section class="pagina conteiner pagina--estreita">
+  <h1 class="titulo">Recuperar senha</h1>
+
+  <form class="painel" (ngSubmit)="enviar()" novalidate>
+    <div class="campo">
+      <label for="email">Informe o seu e-mail</label>
+      <input id="email" name="email" type="email" [(ngModel)]="email" autocomplete="email" />
+    </div>
+
+    @if (sucesso) {
+      <p class="alerta alerta--ok" role="status">{{ sucesso }}</p>
+    }
+    @if (falha) {
+      <p class="alerta alerta--erro" role="alert">{{ falha }}</p>
+    }
+
+    <button type="submit" class="btn btn--primario btn--cheio" [disabled]="enviando">
+      {{ enviando ? "Enviando…" : "Enviar" }}
+    </button>
+    <a routerLink="/login" class="link">Voltar para o login</a>
+  </form>
+</section>

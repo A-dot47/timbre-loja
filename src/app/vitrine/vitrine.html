@@ -1,0 +1,47 @@
+@if (!promo) {
+  <section class="hero">
+    <div class="rosa" aria-hidden="true"></div>
+    <div class="conteiner hero__conteudo">
+      <h1 class="hero__titulo">Do primeiro acorde ao palco.</h1>
+      <p class="hero__texto">Violões, guitarras, teclados, baterias, sopros e acessórios, reunidos em um só lugar.</p>
+      <div class="hero__acoes">
+        <button type="button" class="btn btn--primario btn--grande" (click)="rolar()">Ver destaques</button>
+        <a routerLink="/resultado-busca" [queryParams]="{ termo: 'violão' }" class="btn btn--contorno-claro btn--grande">Procurar violões</a>
+      </div>
+    </div>
+  </section>
+}
+
+<section class="pagina conteiner" id="destaques">
+  <header class="secao__cabeca">
+    <h2 class="secao__titulo">{{ promo ? "Promoções" : "Em destaque" }}</h2>
+    <a routerLink="/resultado-busca" class="link">Ver todos os produtos</a>
+  </header>
+
+  @if (carregando) {
+    <div class="grade" aria-busy="true">
+      @for (n of esqueletos; track n) {
+        <div class="esqueleto-cartao">
+          <div class="esqueleto esqueleto--foto"></div>
+          <div class="esqueleto esqueleto--linha"></div>
+          <div class="esqueleto esqueleto--linha curta"></div>
+        </div>
+      }
+    </div>
+  } @else if (mensagem) {
+    <div class="vazio">
+      <h3>{{ mensagem }}</h3>
+      <p>Veja o catálogo completo para encontrar o que procura.</p>
+      <div class="acoes-linha">
+        <a routerLink="/resultado-busca" class="btn btn--escuro">Ver todos os produtos</a>
+        <button type="button" class="btn btn--contorno" (click)="carregar()">Tentar de novo</button>
+      </div>
+    </div>
+  } @else {
+    <div class="grade">
+      @for (p of lista; track p.codigo) {
+        <app-cartao-produto [produto]="p" />
+      }
+    </div>
+  }
+</section>

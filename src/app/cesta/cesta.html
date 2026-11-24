@@ -1,0 +1,79 @@
+<section class="pagina conteiner">
+  <h1 class="titulo">Sua cesta</h1>
+
+  @if (pedidoGravado) {
+    <div class="vazio vazio--ok">
+      <app-icone nome="ok" [tamanho]="36" />
+      <h2>Pedido realizado!</h2>
+      <p>{{ mensagem }}</p>
+      <div class="acoes-linha">
+        <a routerLink="/pedido" class="btn btn--primario">Ver meus pedidos</a>
+        <a routerLink="/" class="btn btn--contorno">Continuar comprando</a>
+      </div>
+    </div>
+  } @else if (itens.length == 0) {
+    <div class="vazio">
+      <app-icone nome="cesta" [tamanho]="40" />
+      <h2>Sua cesta está vazia</h2>
+      <p>Escolha um instrumento e ele aparece aqui.</p>
+      <a routerLink="/" class="btn btn--primario">Ver destaques</a>
+    </div>
+  } @else {
+    <div class="cesta">
+      <div>
+        <ul class="cesta__lista">
+          @for (item of itens; track item.produto.codigo) {
+            <li class="linha">
+              <div class="linha__foto"><app-foto [produto]="item.produto" /></div>
+
+              <div class="linha__nome">
+                <strong>{{ item.produto.nome }}</strong>
+                <span class="linha__unitario">{{ item.valorVenda | currency: 'BRL' }} cada</span>
+              </div>
+
+              <div class="quantidade" role="group" [attr.aria-label]="'Quantidade de ' + item.produto.nome">
+                <button type="button" (click)="diminuir(item)" aria-label="Diminuir quantidade">
+                  <app-icone nome="menos" [tamanho]="16" />
+                </button>
+                <span>{{ item.quantidade }}</span>
+                <button type="button" (click)="aumentar(item)" aria-label="Aumentar quantidade">
+                  <app-icone nome="mais" [tamanho]="16" />
+                </button>
+              </div>
+
+              <strong class="linha__valor">{{ item.valorTotal | currency: 'BRL' }}</strong>
+
+              <button type="button" class="linha__remover" (click)="removerItem(item)" [attr.aria-label]="'Remover ' + item.produto.nome">
+                <app-icone nome="lixeira" [tamanho]="18" />
+              </button>
+            </li>
+          }
+        </ul>
+        @if (erro) {
+          <p class="alerta alerta--erro" role="alert">{{ erro }}</p>
+        }
+      </div>
+
+      <aside class="resumo" aria-label="Resumo da cesta">
+        <h2 class="resumo__titulo">Resumo</h2>
+        <p class="resumo__linha">{{ itens.length }} {{ itens.length == 1 ? "produto" : "produtos" }}</p>
+        <p class="resumo__total">
+          <span>Total</span>
+          <strong>{{ valorCesta | currency: 'BRL' }}</strong>
+        </p>
+
+        @if (semEndereco) {
+          <p class="alerta alerta--erro" role="alert">
+            Falta o endereço de entrega. <a routerLink="/cadastro" class="link">Completar meu cadastro</a>
+          </p>
+        }
+
+        <button type="button" class="btn btn--primario btn--cheio btn--grande" (click)="gravarPedido()" [disabled]="enviando">
+          {{ enviando ? "Enviando…" : "Finalizar compra" }}
+        </button>
+        <a routerLink="/" class="btn btn--contorno btn--cheio">Continuar comprando</a>
+        <button type="button" class="link link--perigo" (click)="limparCesta()">Limpar cesta</button>
+      </aside>
+    </div>
+  }
+</section>

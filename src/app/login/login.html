@@ -1,0 +1,34 @@
+<section class="pagina conteiner">
+  <h1 class="titulo">Entrar ou criar conta</h1>
+
+  <div class="duas-colunas">
+    <form class="painel" (ngSubmit)="fazerLogin()">
+      <h2 class="painel__titulo">Já tenho cadastro</h2>
+
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" [(ngModel)]="email" autocomplete="email" />
+      </div>
+
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input id="senha" name="senha" type="password" [(ngModel)]="senha" autocomplete="current-password" />
+      </div>
+
+      @if (mensagem) {
+        <p class="alerta alerta--erro" role="alert">{{ mensagem }}</p>
+      }
+
+      <button type="submit" class="btn btn--primario btn--cheio" [disabled]="enviando">
+        {{ enviando ? "Entrando…" : "Entrar" }}
+      </button>
+      <a routerLink="/reenvio" class="link">Esqueci minha senha</a>
+    </form>
+
+    <div class="painel painel--destaque">
+      <h2 class="painel__titulo">Ainda não tenho cadastro</h2>
+      <p>Crie sua conta para guardar seus dados e finalizar compras mais rápido.</p>
+      <a routerLink="/cadastro" class="btn btn--escuro btn--cheio">Criar minha conta</a>
+    </div>
+  </div>
+</section>

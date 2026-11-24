@@ -1,0 +1,48 @@
+<section class="pagina conteiner">
+  <a routerLink="/" class="voltar"><app-icone nome="seta" [tamanho]="18" /> Voltar à loja</a>
+
+  @if (mensagem) {
+    <div class="vazio">
+      <h1 class="titulo">Produto não encontrado</h1>
+      <p>{{ mensagem }}</p>
+      <a routerLink="/resultado-busca" class="btn btn--escuro">Ver todos os produtos</a>
+    </div>
+  } @else {
+    <article class="detalhe">
+      <div class="detalhe__foto">
+        <app-foto [produto]="obj" />
+      </div>
+
+      <div class="detalhe__info">
+        <h1 class="titulo">{{ obj.nome }}</h1>
+
+        <p class="preco preco--grande">
+          @if (promo()) {
+            <s class="preco__de">{{ obj.valor | currency: 'BRL' }}</s>
+          }
+          <strong class="preco__por">{{ preco() | currency: 'BRL' }}</strong>
+        </p>
+
+        @if (obj.descritivo) {
+          <p class="detalhe__descricao">{{ obj.descritivo }}</p>
+        }
+
+        @if (palavras().length > 0) {
+          <ul class="etiquetas" aria-label="Palavras-chave">
+            @for (palavra of palavras(); track palavra) {
+              <li><a routerLink="/resultado-busca" [queryParams]="{ termo: palavra }">{{ palavra }}</a></li>
+            }
+          </ul>
+        }
+
+        @if (obj.quantidade > 0) {
+          <button type="button" class="btn btn--primario btn--grande" (click)="comprar()">
+            <app-icone nome="cesta" [tamanho]="20" /> Comprar
+          </button>
+        } @else {
+          <p class="esgotado">Esgotado no momento</p>
+        }
+      </div>
+    </article>
+  }
+</section>
